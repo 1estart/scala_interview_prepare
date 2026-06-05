@@ -5,3 +5,7 @@ project/target/
 *.iml
 *.iws
 .DS_Store
+.bsp/
+.metals/
+.scala-build/
+.vscode/
