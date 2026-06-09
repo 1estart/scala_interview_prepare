@@ -28,7 +28,6 @@ object GraphAlgorithms:
         println(s"BFS visit node: $currentNode")
         val newVisited = visited + currentNode
         
-        // Берем соседей, которых еще не посещали, и добавляем в конец очереди
         val neighbors = graph.getOrElse(currentNode, Nil)
         val newNeighbors = neighbors.filterNot(newVisited.contains)
         
