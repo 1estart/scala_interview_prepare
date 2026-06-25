@@ -27,3 +27,7 @@
   GraphAlgorithms.dfs(graph, 1)
   
   GraphAlgorithms.bfs(graph, List(1), Set.empty)
+  
+  import sttp.client4.quick.*
+
+  println(quickRequest.get(uri"http://httpbin.org/ip").send())
