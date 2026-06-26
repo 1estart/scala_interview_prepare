@@ -36,3 +36,11 @@
   val env = Map("population" -> 1000000.0)
   val expr = Div(Mul(Add(Num(1), Num(2)), Add(Num(3), Num(4))), Var("population"));
   println(Expr.eval(expr, env))
+
+  val tree = Branch(Leaf("a"), Branch(Leaf("b"), Leaf("c")))
+  val stateComputation = State.numberLeaves(tree)
+
+  val (resultTree, finalState) = stateComputation.run(0)
+  println(resultTree)
+  println(finalState)
+
