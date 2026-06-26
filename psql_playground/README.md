@@ -1,0 +1,5 @@
+- install docker;
+- install pgcli;
+- run docker-compose up -d;
+- python -m pgcli postgres://world:world123@localhost:5432/world-db;
+- run docker-compose down for stop;

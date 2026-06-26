@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  world-db:
+    image: ghusta/postgres-world-db:2.5
+    container_name: postgres-world-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: world-db
+      POSTGRES_USER: world
+      POSTGRES_PASSWORD: world123
+    restart: unless-stopped
