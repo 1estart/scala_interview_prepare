@@ -6,6 +6,9 @@ import sttp.tapir.json.circe.*
 import sttp.tapir.generic.auto.*
 import sttp.tapir.server.http4s.Http4sServerInterpreter
 import io.circe.generic.auto.*
+import Doobie.createTransactor
+import Doobie.runMigrations
+import Doobie.seedData
 
 case class Tour(id: String, hotel: String, price: Double)
 
@@ -19,7 +22,16 @@ val tourRoute = tourEndpoint.serverLogic { tourId =>
 }
 
 object Main extends IOApp.Simple:
+
   def run: IO[Unit] =
+    createTransactor.use { xa =>
+      (runMigrations(xa) *> seedData(xa)) *>
+        (
+          periodicSearchProcessor(xa).compile.drain,
+          startWebServer
+        ).parTupled.void
+    }
+  def startWebServer: IO[Unit] =
     EmberServerBuilder
       .default[IO]
       .withHost(host"0.0.0.0")
